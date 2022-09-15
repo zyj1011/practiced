@@ -1,0 +1,43 @@
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
+/**
+ * @author wx1133650
+ * date 2022/9/15 14:37
+ */
+public class JSChorus {
+    public static void main(String[] args) throws IOException {
+        Scanner sc = new Scanner(System.in);
+        int num = sc.nextInt();
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        for (int i=0;i<num;i++){
+            arrayList.add(sc.nextInt());
+        }
+        int dpLeft[] = new int[num];
+        int dpRight[] = new int[num];
+        dpLeft[0]=1;
+        dpRight[0]=1;
+        for (int i=0;i<num;i++){
+            for (int j=0;j<i;j++){
+                if (arrayList.get(i)>arrayList.get(j)){
+                    dpLeft[i] = Math.max(dpLeft[i],dpLeft[j]+1);
+                }
+            }
+        }
+        for (int i=num-1;i>=0;i--){
+            for (int j=num-1;j>i;j--){
+                if (arrayList.get(i)>arrayList.get(j)){
+                    dpRight[i] = Math.max(dpRight[i],dpRight[j]+1);
+                }
+            }
+        }
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i=0;i<num;i++){
+            list.add(dpLeft[i]+dpRight[i]);
+        }
+        Collections.sort(list);
+        System.out.println(num-list.get(list.size()-1));
+    }
+}
