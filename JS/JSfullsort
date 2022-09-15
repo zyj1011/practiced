@@ -1,0 +1,42 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class JSfullsort {
+    static ArrayList arrayList = new ArrayList();
+    public static void main(String[] args) throws IOException {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        String[] split = bf.readLine().split(",");
+        int[] arr = new int[split.length];
+        for (int i=0;i<arr.length;i++){
+            arr[i] = Integer.parseInt(split[i]);
+        }
+        fullSort(arr, 0);
+        System.out.println(Collections.max(arrayList));
+    }
+
+    public static void fullSort(int[] arr, int start) {
+        // 递归终止条件
+        if (start == arr.length-1){
+            String str = "";
+            for (int i=0;i<arr.length;i++){
+                str += String.valueOf(arr[i]);
+            }
+            arrayList.add(Integer.parseInt(str));
+            return;
+        }
+        for (int i=start;i<=arr.length-1;i++){
+            swap(arr,i,start);
+            fullSort(arr,start+1);
+            swap(arr,i,start);
+        }
+    }
+
+    private static void swap(int[] arr, int i, int j) {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+    }
+}
