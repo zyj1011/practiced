@@ -1,0 +1,75 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.regex.Pattern;
+
+/**
+ * @author wx1133650
+ * date 2022/9/15 9:50
+ */
+public class JSEasyPass {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        String[] split = bf.readLine().split("");
+        StringBuffer stringBuffer = new StringBuffer();
+        for (String i : split){
+            if (Pattern.compile("[0-9]").matcher(i).matches()){
+                stringBuffer.append(i);
+            }else if (Pattern.compile("[a-z]").matcher(i).matches()){
+                switch (i){
+                    case "a":
+                    case "b":
+                    case "c":
+                        stringBuffer.append("2");
+                        break;
+                    case "d":
+                    case "e":
+                    case "f":
+                        stringBuffer.append("3");
+                        break;
+                    case "g":
+                    case "h":
+                    case "i":
+                        stringBuffer.append("4");
+                        break;
+                    case "j":
+                    case "k":
+                    case "l":
+                        stringBuffer.append("5");
+                        break;
+                    case "m":
+                    case "n":
+                    case "o":
+                        stringBuffer.append("6");
+                        break;
+                    case "p":
+                    case "q":
+                    case "r":
+                    case "s":
+                        stringBuffer.append("7");
+                        break;
+                    case "t":
+                    case "u":
+                    case "v":
+                        stringBuffer.append("8");
+                        break;
+                    case "w":
+                    case "x":
+                    case "y":
+                    case "z":
+                        stringBuffer.append("9");
+                        break;
+                }
+            }else if (Pattern.compile("[A-Z]").matcher(i).matches()){
+                if (i.equals("Z")){
+                    stringBuffer.append("a");
+                }else {
+                    int result = i.charAt(0);
+                    char c = (char) (result + 32 + 1);
+                    stringBuffer.append(c);
+                }
+            }
+        }
+        System.out.println(stringBuffer);
+    }
+}
