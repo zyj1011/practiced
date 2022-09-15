@@ -1,0 +1,58 @@
+import com.alibaba.excel.util.StringUtils;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+
+/**
+ * @author wx1133650
+ * date 2022/9/15 10:45
+ */
+public class JSDeleteMin {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        String readLine = bf.readLine();
+        String[] split = readLine.split("");
+        HashMap<String, Integer> hashMap = new HashMap<>();
+        for (String i: split){
+            if (hashMap.containsKey(i)){
+                hashMap.put(i,hashMap.get(i)+1);
+                continue;
+            }
+            hashMap.put(i,1);
+        }
+        Collection<Integer> values = hashMap.values();
+        Integer min = Collections.min(values);
+        for (String s : hashMap.keySet()){
+            if (hashMap.get(s) == min){
+                readLine = readLine.replaceAll(s, "");
+            }
+        }
+        System.out.println(readLine);
+
+//        delete(hashMap,Integer.MAX_VALUE);
+//        Iterator<Map.Entry<String, Integer>> iterator = hashMap.entrySet().iterator();
+//        while (iterator.hasNext()){
+//            Map.Entry<String, Integer> next = iterator.next();
+//            for (int i=0;i<next.getValue();i++){
+//                System.out.print(next.getKey());
+//            }
+//        }
+//    }
+//    private static void delete(HashMap<String,Integer> hashMap, int min){
+//        Iterator<Map.Entry<String, Integer>> iterator = hashMap.entrySet().iterator();
+//        String key = "";
+//        while (iterator.hasNext()){
+//            Map.Entry<String, Integer> next = iterator.next();
+//            while (next.getValue() < min){
+//                key = next.getKey();
+//                min = next.getValue();
+//            }
+//        }
+//        if (!StringUtils.isEmpty(key)) {
+//            hashMap.remove(key);
+//            delete(hashMap,min+1);
+//        }
+    }
+}
